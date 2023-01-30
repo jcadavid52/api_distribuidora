@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_GEOGRAFIAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ciudad">
+    <Key>
+      <PropertyRef Name="Pk_id_ciudad" />
+    </Key>
+    <Property Name="Pk_id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_ciudad" Type="varchar" MaxLength="70" />
+    <Property Name="id_pais" Type="int" />
+    <Property Name="id_depto" Type="int" />
+  </EntityType>
+  <EntityType Name="Depto">
+    <Key>
+      <PropertyRef Name="Pk_id_Depto" />
+    </Key>
+    <Property Name="Pk_id_Depto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Depto" Type="varchar" MaxLength="70" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="Pk_id_pais" />
+    </Key>
+    <Property Name="Pk_id_pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_pais" Type="varchar" MaxLength="70" />
+  </EntityType>
+  <Association Name="fk_depto">
+    <End Role="Depto" Type="Self.Depto" Multiplicity="0..1" />
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Depto">
+        <PropertyRef Name="Pk_id_Depto" />
+      </Principal>
+      <Dependent Role="Ciudad">
+        <PropertyRef Name="id_depto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pais">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Pk_id_pais" />
+      </Principal>
+      <Dependent Role="Ciudad">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_GEOGRAFIAModelStoreContainer">
+    <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Depto" EntityType="Self.Depto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_depto" Association="Self.fk_depto">
+      <End Role="Depto" EntitySet="Depto" />
+      <End Role="Ciudad" EntitySet="Ciudad" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pais" Association="Self.fk_pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Ciudad" EntitySet="Ciudad" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

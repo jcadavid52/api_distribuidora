@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_GEOGRAFIAModelStoreContainer" CdmEntityContainer="BD_GEOGRAFIAEntities">
+    <EntitySetMapping Name="Ciudad">
+      <EntityTypeMapping TypeName="BD_GEOGRAFIAModel.Ciudad">
+        <MappingFragment StoreEntitySet="Ciudad">
+          <ScalarProperty Name="Pk_id_ciudad" ColumnName="Pk_id_ciudad" />
+          <ScalarProperty Name="Nombre_ciudad" ColumnName="Nombre_ciudad" />
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+          <ScalarProperty Name="id_depto" ColumnName="id_depto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Depto">
+      <EntityTypeMapping TypeName="BD_GEOGRAFIAModel.Depto">
+        <MappingFragment StoreEntitySet="Depto">
+          <ScalarProperty Name="Pk_id_Depto" ColumnName="Pk_id_Depto" />
+          <ScalarProperty Name="Nombre_Depto" ColumnName="Nombre_Depto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pais">
+      <EntityTypeMapping TypeName="BD_GEOGRAFIAModel.Pais">
+        <MappingFragment StoreEntitySet="Pais">
+          <ScalarProperty Name="Pk_id_pais" ColumnName="Pk_id_pais" />
+          <ScalarProperty Name="Nombre_pais" ColumnName="Nombre_pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

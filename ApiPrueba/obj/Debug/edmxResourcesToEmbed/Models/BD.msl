@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_BODEGAModelStoreContainer" CdmEntityContainer="BD_BODEGAEntities">
+    <FunctionImportMapping FunctionImportName="SP_INSERTAR_DETALLE_FACT" FunctionName="BD_BODEGAModel.Store.SP_INSERTAR_DETALLE_FACT" />
+    <EntitySetMapping Name="CARGO">
+      <EntityTypeMapping TypeName="BD_BODEGAModel.CARGO">
+        <MappingFragment StoreEntitySet="CARGO">
+          <ScalarProperty Name="SIGLAS" ColumnName="SIGLAS" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="PK_ID_CARGO" ColumnName="PK_ID_CARGO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTE">
+      <EntityTypeMapping TypeName="BD_BODEGAModel.CLIENTE">
+        <MappingFragment StoreEntitySet="CLIENTE">
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+          <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+          <ScalarProperty Name="PK_ID_CLIENTE" ColumnName="PK_ID_CLIENTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOS_EMPLEADO">
+      <EntityTypeMapping TypeName="BD_BODEGAModel.DATOS_EMPLEADO">
+        <MappingFragment StoreEntitySet="DATOS_EMPLEADO">
+          <ScalarProperty Name="FK_ID_TIPO_DOCUMENTO" ColumnName="FK_ID_TIPO_DOCUMENTO" />
+          <ScalarProperty Name="FECHA_INGRESO_EMP" ColumnName="FECHA_INGRESO_EMP" />
+          <ScalarProperty Name="NUMERO_ACCESO" ColumnName="NUMERO_ACCESO" />
+          <ScalarProperty Name="GENERO" ColumnName="GENERO" />
+          <ScalarProperty Name="CORREO_ELECTRONICO" ColumnName="CORREO_ELECTRONICO" />
+          <ScalarProperty Name="NUMERO_CONTACTO" ColumnName="NUMERO_CONTACTO" />
+          <ScalarProperty Name="FECHA_EXPEDICION" ColumnName="FECHA_EXPEDICION" />
+          <ScalarProperty Name="NUMERO_DOCUMENTO" ColumnName="NUMERO_DOCUMENTO" />
+          <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+          <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+          <ScalarProperty Name="PK_ID_EMPLEADO" ColumnName="PK_ID_EMPLEADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_FACT">
+      <EntityTypeMapping TypeName="BD_BODEGAModel.DETALLE_FACT">
+        <MappingFragment StoreEntitySet="DETALLE_FACT">
+          <ScalarProperty Name="FK_ID_FACTURA" ColumnName="FK_ID_FACTURA" />
+          <ScalarProperty Name="FK_ID_PRODUCTO" ColumnName="FK_ID_PRODUCTO" />
+          <ScalarProperty Name="FK_ID_USUARIO" ColumnName="FK_ID_USUARIO" />
+          <ScalarProperty Name="FK_ID_CLIENTE" ColumnName="FK_ID_CLIENTE" />
+          <ScalarProperty Name="IVA_DETALLE_FACT" ColumnName="IVA_DETALLE_FACT" />
+          <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
+          <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
+          <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+          <ScalarProperty Name="CANTIDAD_PRODUCTO" ColumnName="CANTIDAD_PRODUCTO" />
+          <ScalarProperty Name="PK_ID_DETALLE_FACT" ColumnName="PK_ID_DETALLE_FACT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTO">
+      <EntityTypeMapping TypeName="BD_BODEGAModel.PRODUCTO">
+        <MappingFragment StoreEntitySet="PRODUCTO">
+          <ScalarProperty Name="IVA" ColumnName="IVA" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+          <ScalarProperty Name="REFERENCIA" ColumnName="REFERENCIA" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="NOMBRE_PRODUC" ColumnName="NOMBRE_PRODUC" />
+          <ScalarProperty Name="PK_ID_PRODUCTO" ColumnName="PK_ID_PRODUCTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO">
+      <EntityTypeMapping TypeName="BD_BODEGAModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="FK_ID_CARGO" ColumnName="FK_ID_CARGO" />
+          <ScalarProperty Name="FK_ID_EMPLEADO" ColumnName="FK_ID_EMPLEADO" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+          <ScalarProperty Name="USUARIO1" ColumnName="USUARIO" />
+          <ScalarProperty Name="PK_ID_USUARIO" ColumnName="PK_ID_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FACTURA">
+      <EntityTypeMapping TypeName="BD_BODEGAModel.FACTURA">
+        <MappingFragment StoreEntitySet="FACTURA">
+          <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+          <ScalarProperty Name="INFORME_VENTA" ColumnName="INFORME_VENTA" />
+          <ScalarProperty Name="FECHA_FACTURA" ColumnName="FECHA_FACTURA" />
+          <ScalarProperty Name="PK_ID_FACTURA" ColumnName="PK_ID_FACTURA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_AGREGAR_FACTURA2" FunctionName="BD_BODEGAModel.Store.SP_AGREGAR_FACTURA2" />
+    <FunctionImportMapping FunctionImportName="SP_CONSULTAR_FACTURA" FunctionName="BD_BODEGAModel.Store.SP_CONSULTAR_FACTURA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BD_BODEGAModel.SP_CONSULTAR_FACTURA_Result">
+          <ScalarProperty Name="codigo_factura" ColumnName="codigo_factura" />
+          <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+          <ScalarProperty Name="precio_unidad" ColumnName="precio_unidad" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="SubTotal_por_unidad" ColumnName="SubTotal_por_unidad" />
+          <ScalarProperty Name="Total_por_Unidad" ColumnName="Total_por_Unidad" />
+          <ScalarProperty Name="total_descuento" ColumnName="total_descuento" />
+          <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

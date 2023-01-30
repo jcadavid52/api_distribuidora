@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c58de4598994f9eaf0ca64f8983810f" Name="Diagram1">
+        <EntityTypeShape EntityType="BD_BODEGAModel.CARGO" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="BD_BODEGAModel.CLIENTE" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="BD_BODEGAModel.DATOS_EMPLEADO" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="BD_BODEGAModel.DETALLE_FACT" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="BD_BODEGAModel.PRODUCTO" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="BD_BODEGAModel.USUARIO" Width="1.5" PointX="3.25" PointY="2.375" />
+        <AssociationConnector Association="BD_BODEGAModel.FK__USUARIO__FK_ID_C__48CFD27E" />
+        <AssociationConnector Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__19DFD96B" />
+        <AssociationConnector Association="BD_BODEGAModel.FK__USUARIO__FK_ID_E__47DBAE45" />
+        <AssociationConnector Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1AD3FDA4" />
+        <AssociationConnector Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1BC821DD" />
+        <EntityTypeShape EntityType="BD_BODEGAModel.FACTURA" Width="1.5" PointX="7.375" PointY="6" />
+        <AssociationConnector Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1CBC4616" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

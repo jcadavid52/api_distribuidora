@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_BODEGAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CARGO">
+    <Key>
+      <PropertyRef Name="PK_ID_CARGO" />
+    </Key>
+    <Property Name="PK_ID_CARGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
+    <Property Name="SIGLAS" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="PK_ID_CLIENTE" />
+    </Key>
+    <Property Name="PK_ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRES" Type="varchar" MaxLength="50" />
+    <Property Name="APELLIDOS" Type="varchar" MaxLength="50" />
+    <Property Name="DIRECCION" Type="varchar" MaxLength="50" />
+    <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
+    <Property Name="CORREO" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="DATOS_EMPLEADO">
+    <Key>
+      <PropertyRef Name="PK_ID_EMPLEADO" />
+    </Key>
+    <Property Name="PK_ID_EMPLEADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRES" Type="varchar" MaxLength="50" />
+    <Property Name="APELLIDOS" Type="varchar" MaxLength="50" />
+    <Property Name="NUMERO_DOCUMENTO" Type="varchar" MaxLength="30" />
+    <Property Name="FECHA_EXPEDICION" Type="date" />
+    <Property Name="NUMERO_CONTACTO" Type="varchar" MaxLength="30" />
+    <Property Name="CORREO_ELECTRONICO" Type="varchar" MaxLength="50" />
+    <Property Name="GENERO" Type="char" MaxLength="1" />
+    <Property Name="NUMERO_ACCESO" Type="int" />
+    <Property Name="FECHA_INGRESO_EMP" Type="date" />
+    <Property Name="FK_ID_TIPO_DOCUMENTO" Type="int" />
+  </EntityType>
+  <EntityType Name="DETALLE_FACT">
+    <Key>
+      <PropertyRef Name="PK_ID_DETALLE_FACT" />
+    </Key>
+    <Property Name="PK_ID_DETALLE_FACT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CANTIDAD_PRODUCTO" Type="int" />
+    <Property Name="SUBTOTAL" Type="float" />
+    <Property Name="DESCUENTO" Type="float" />
+    <Property Name="VALOR_TOTAL" Type="float" />
+    <Property Name="IVA_DETALLE_FACT" Type="float" />
+    <Property Name="FK_ID_CLIENTE" Type="int" />
+    <Property Name="FK_ID_USUARIO" Type="int" />
+    <Property Name="FK_ID_PRODUCTO" Type="int" />
+    <Property Name="FK_ID_FACTURA" Type="int" />
+  </EntityType>
+  <EntityType Name="FACTURA">
+    <Key>
+      <PropertyRef Name="PK_ID_FACTURA" />
+    </Key>
+    <Property Name="PK_ID_FACTURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHA_FACTURA" Type="datetime" />
+    <Property Name="INFORME_VENTA" Type="varchar" MaxLength="200" />
+    <Property Name="SUBTOTAL" Type="float" />
+    <Property Name="TOTAL" Type="float" />
+    <Property Name="DESCUENTO" Type="float" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="PK_ID_PRODUCTO" />
+    </Key>
+    <Property Name="PK_ID_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE_PRODUC" Type="varchar" MaxLength="150" />
+    <Property Name="CANTIDAD" Type="int" />
+    <Property Name="REFERENCIA" Type="varchar" MaxLength="100" />
+    <Property Name="PRECIO" Type="float" />
+    <Property Name="FECHA" Type="date" />
+    <Property Name="IVA" Type="float" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="PK_ID_USUARIO" />
+    </Key>
+    <Property Name="PK_ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USUARIO" Type="varchar" MaxLength="50" />
+    <Property Name="CLAVE" Type="varchar" MaxLength="200" />
+    <Property Name="ESTADO" Type="bit" />
+    <Property Name="FK_ID_EMPLEADO" Type="int" />
+    <Property Name="FK_ID_CARGO" Type="int" />
+  </EntityType>
+  <Association Name="FK__DETALLE_F__FK_ID__19DFD96B">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+    <End Role="DETALLE_FACT" Type="Self.DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="PK_ID_CLIENTE" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_CLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETALLE_F__FK_ID__1AD3FDA4">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="DETALLE_FACT" Type="Self.DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="PK_ID_USUARIO" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETALLE_F__FK_ID__1BC821DD">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+    <End Role="DETALLE_FACT" Type="Self.DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="PK_ID_PRODUCTO" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETALLE_F__FK_ID__1CBC4616">
+    <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="0..1" />
+    <End Role="DETALLE_FACT" Type="Self.DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURA">
+        <PropertyRef Name="PK_ID_FACTURA" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USUARIO__FK_ID_C__48CFD27E">
+    <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARGO">
+        <PropertyRef Name="PK_ID_CARGO" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="FK_ID_CARGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USUARIO__FK_ID_E__47DBAE45">
+    <End Role="DATOS_EMPLEADO" Type="Self.DATOS_EMPLEADO" Multiplicity="0..1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DATOS_EMPLEADO">
+        <PropertyRef Name="PK_ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="FK_ID_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_AGREGAR_FACTURA2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FECHA_FACTURA" Type="datetime" Mode="In" />
+    <Parameter Name="INFORME_VENTA" Type="varchar" Mode="In" />
+    <Parameter Name="FK_CLIENTE" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_CONSULTAR_FACTURA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_factura" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERTAR_DETALLE_FACT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CANTIDAD_PRODUCTO" Type="int" Mode="In" />
+    <Parameter Name="DESCUENTO" Type="float" Mode="In" />
+    <Parameter Name="FK_ID_USUARIO" Type="int" Mode="In" />
+    <Parameter Name="FK_ID_PRODUCTO" Type="int" Mode="In" />
+    <Parameter Name="FK_ID_CLIENTE" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="BD_BODEGAModelStoreContainer">
+    <EntitySet Name="CARGO" EntityType="Self.CARGO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DATOS_EMPLEADO" EntityType="Self.DATOS_EMPLEADO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETALLE_FACT" EntityType="Self.DETALLE_FACT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__19DFD96B" Association="Self.FK__DETALLE_F__FK_ID__19DFD96B">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__1AD3FDA4" Association="Self.FK__DETALLE_F__FK_ID__1AD3FDA4">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__1BC821DD" Association="Self.FK__DETALLE_F__FK_ID__1BC821DD">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__1CBC4616" Association="Self.FK__DETALLE_F__FK_ID__1CBC4616">
+      <End Role="FACTURA" EntitySet="FACTURA" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USUARIO__FK_ID_C__48CFD27E" Association="Self.FK__USUARIO__FK_ID_C__48CFD27E">
+      <End Role="CARGO" EntitySet="CARGO" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USUARIO__FK_ID_E__47DBAE45" Association="Self.FK__USUARIO__FK_ID_E__47DBAE45">
+      <End Role="DATOS_EMPLEADO" EntitySet="DATOS_EMPLEADO" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

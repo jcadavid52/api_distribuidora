@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_BODEGAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BD_BODEGAEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="SP_INSERTAR_DETALLE_FACT">
+      <Parameter Name="CANTIDAD_PRODUCTO" Mode="In" Type="Int32" />
+      <Parameter Name="DESCUENTO" Mode="In" Type="Double" />
+      <Parameter Name="FK_ID_USUARIO" Mode="In" Type="Int32" />
+      <Parameter Name="FK_ID_PRODUCTO" Mode="In" Type="Int32" />
+      <Parameter Name="FK_ID_CLIENTE" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="CARGO" EntityType="BD_BODEGAModel.CARGO" />
+    <EntitySet Name="CLIENTE" EntityType="BD_BODEGAModel.CLIENTE" />
+    <EntitySet Name="DATOS_EMPLEADO" EntityType="BD_BODEGAModel.DATOS_EMPLEADO" />
+    <EntitySet Name="DETALLE_FACT" EntityType="BD_BODEGAModel.DETALLE_FACT" />
+    <EntitySet Name="PRODUCTO" EntityType="BD_BODEGAModel.PRODUCTO" />
+    <EntitySet Name="USUARIO" EntityType="BD_BODEGAModel.USUARIO" />
+    <AssociationSet Name="FK__USUARIO__FK_ID_C__48CFD27E" Association="BD_BODEGAModel.FK__USUARIO__FK_ID_C__48CFD27E">
+      <End Role="CARGO" EntitySet="CARGO" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__19DFD96B" Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__19DFD96B">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USUARIO__FK_ID_E__47DBAE45" Association="BD_BODEGAModel.FK__USUARIO__FK_ID_E__47DBAE45">
+      <End Role="DATOS_EMPLEADO" EntitySet="DATOS_EMPLEADO" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__1AD3FDA4" Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1AD3FDA4">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__1BC821DD" Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1BC821DD">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <EntitySet Name="FACTURA" EntityType="BD_BODEGAModel.FACTURA" />
+    <AssociationSet Name="FK__DETALLE_F__FK_ID__1CBC4616" Association="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1CBC4616">
+      <End Role="FACTURA" EntitySet="FACTURA" />
+      <End Role="DETALLE_FACT" EntitySet="DETALLE_FACT" />
+    </AssociationSet>
+    <FunctionImport Name="SP_AGREGAR_FACTURA2" ReturnType="Collection(Int32)">
+      <Parameter Name="FECHA_FACTURA" Mode="In" Type="DateTime" />
+      <Parameter Name="INFORME_VENTA" Mode="In" Type="String" />
+      <Parameter Name="FK_CLIENTE" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_CONSULTAR_FACTURA" ReturnType="Collection(BD_BODEGAModel.SP_CONSULTAR_FACTURA_Result)">
+      <Parameter Name="id_factura" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="CARGO">
+    <Key>
+      <PropertyRef Name="PK_ID_CARGO" />
+    </Key>
+    <Property Name="PK_ID_CARGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SIGLAS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USUARIO" Relationship="BD_BODEGAModel.FK__USUARIO__FK_ID_C__48CFD27E" FromRole="CARGO" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="PK_ID_CLIENTE" />
+    </Key>
+    <Property Name="PK_ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CORREO" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DETALLE_FACT" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__19DFD96B" FromRole="CLIENTE" ToRole="DETALLE_FACT" />
+  </EntityType>
+  <EntityType Name="DATOS_EMPLEADO">
+    <Key>
+      <PropertyRef Name="PK_ID_EMPLEADO" />
+    </Key>
+    <Property Name="PK_ID_EMPLEADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NUMERO_DOCUMENTO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA_EXPEDICION" Type="DateTime" Precision="0" />
+    <Property Name="NUMERO_CONTACTO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CORREO_ELECTRONICO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GENERO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="NUMERO_ACCESO" Type="Int32" />
+    <Property Name="FECHA_INGRESO_EMP" Type="DateTime" Precision="0" />
+    <Property Name="FK_ID_TIPO_DOCUMENTO" Type="Int32" />
+    <NavigationProperty Name="USUARIO" Relationship="BD_BODEGAModel.FK__USUARIO__FK_ID_E__47DBAE45" FromRole="DATOS_EMPLEADO" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="DETALLE_FACT">
+    <Key>
+      <PropertyRef Name="PK_ID_DETALLE_FACT" />
+    </Key>
+    <Property Name="PK_ID_DETALLE_FACT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CANTIDAD_PRODUCTO" Type="Int32" />
+    <Property Name="SUBTOTAL" Type="Double" />
+    <Property Name="DESCUENTO" Type="Double" />
+    <Property Name="VALOR_TOTAL" Type="Double" />
+    <Property Name="IVA_DETALLE_FACT" Type="Double" />
+    <Property Name="FK_ID_CLIENTE" Type="Int32" />
+    <Property Name="FK_ID_USUARIO" Type="Int32" />
+    <Property Name="FK_ID_PRODUCTO" Type="Int32" />
+    <Property Name="FK_ID_FACTURA" Type="Int32" />
+    <NavigationProperty Name="CLIENTE" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__19DFD96B" FromRole="DETALLE_FACT" ToRole="CLIENTE" />
+    <NavigationProperty Name="USUARIO" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1AD3FDA4" FromRole="DETALLE_FACT" ToRole="USUARIO" />
+    <NavigationProperty Name="PRODUCTO" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1BC821DD" FromRole="DETALLE_FACT" ToRole="PRODUCTO" />
+    <NavigationProperty Name="FACTURA" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1CBC4616" FromRole="DETALLE_FACT" ToRole="FACTURA" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="PK_ID_PRODUCTO" />
+    </Key>
+    <Property Name="PK_ID_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE_PRODUC" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="CANTIDAD" Type="Int32" />
+    <Property Name="REFERENCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PRECIO" Type="Double" />
+    <Property Name="FECHA" Type="DateTime" Precision="0" />
+    <Property Name="IVA" Type="Double" />
+    <NavigationProperty Name="DETALLE_FACT" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1BC821DD" FromRole="PRODUCTO" ToRole="DETALLE_FACT" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="PK_ID_USUARIO" />
+    </Key>
+    <Property Name="PK_ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USUARIO1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CLAVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ESTADO" Type="Boolean" />
+    <Property Name="FK_ID_EMPLEADO" Type="Int32" />
+    <Property Name="FK_ID_CARGO" Type="Int32" />
+    <NavigationProperty Name="CARGO" Relationship="BD_BODEGAModel.FK__USUARIO__FK_ID_C__48CFD27E" FromRole="USUARIO" ToRole="CARGO" />
+    <NavigationProperty Name="DATOS_EMPLEADO" Relationship="BD_BODEGAModel.FK__USUARIO__FK_ID_E__47DBAE45" FromRole="USUARIO" ToRole="DATOS_EMPLEADO" />
+    <NavigationProperty Name="DETALLE_FACT" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1AD3FDA4" FromRole="USUARIO" ToRole="DETALLE_FACT" />
+  </EntityType>
+  <Association Name="FK__USUARIO__FK_ID_C__48CFD27E">
+    <End Type="BD_BODEGAModel.CARGO" Role="CARGO" Multiplicity="0..1" />
+    <End Type="BD_BODEGAModel.USUARIO" Role="USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARGO">
+        <PropertyRef Name="PK_ID_CARGO" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="FK_ID_CARGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETALLE_F__FK_ID__19DFD96B">
+    <End Type="BD_BODEGAModel.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
+    <End Type="BD_BODEGAModel.DETALLE_FACT" Role="DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="PK_ID_CLIENTE" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_CLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USUARIO__FK_ID_E__47DBAE45">
+    <End Type="BD_BODEGAModel.DATOS_EMPLEADO" Role="DATOS_EMPLEADO" Multiplicity="0..1" />
+    <End Type="BD_BODEGAModel.USUARIO" Role="USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DATOS_EMPLEADO">
+        <PropertyRef Name="PK_ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="FK_ID_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETALLE_F__FK_ID__1AD3FDA4">
+    <End Type="BD_BODEGAModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+    <End Type="BD_BODEGAModel.DETALLE_FACT" Role="DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="PK_ID_USUARIO" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETALLE_F__FK_ID__1BC821DD">
+    <End Type="BD_BODEGAModel.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
+    <End Type="BD_BODEGAModel.DETALLE_FACT" Role="DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="PK_ID_PRODUCTO" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FACTURA">
+    <Key>
+      <PropertyRef Name="PK_ID_FACTURA" />
+    </Key>
+    <Property Name="PK_ID_FACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHA_FACTURA" Type="DateTime" Precision="3" />
+    <Property Name="INFORME_VENTA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="SUBTOTAL" Type="Double" />
+    <Property Name="TOTAL" Type="Double" />
+    <Property Name="DESCUENTO" Type="Double" />
+    <NavigationProperty Name="DETALLE_FACT" Relationship="BD_BODEGAModel.FK__DETALLE_F__FK_ID__1CBC4616" FromRole="FACTURA" ToRole="DETALLE_FACT" />
+  </EntityType>
+  <Association Name="FK__DETALLE_F__FK_ID__1CBC4616">
+    <End Type="BD_BODEGAModel.FACTURA" Role="FACTURA" Multiplicity="0..1" />
+    <End Type="BD_BODEGAModel.DETALLE_FACT" Role="DETALLE_FACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURA">
+        <PropertyRef Name="PK_ID_FACTURA" />
+      </Principal>
+      <Dependent Role="DETALLE_FACT">
+        <PropertyRef Name="FK_ID_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_CONSULTAR_FACTURA_Result">
+    <Property Type="Int32" Name="codigo_factura" Nullable="false" />
+    <Property Type="String" Name="nombre_producto" Nullable="true" MaxLength="150" />
+    <Property Type="Double" Name="precio_unidad" Nullable="true" />
+    <Property Type="Int32" Name="cantidad" Nullable="true" />
+    <Property Type="Double" Name="SubTotal_por_unidad" Nullable="true" />
+    <Property Type="Double" Name="Total_por_Unidad" Nullable="true" />
+    <Property Type="Double" Name="total_descuento" Nullable="true" />
+    <Property Type="Double" Name="SUBTOTAL" Nullable="true" />
+    <Property Type="Double" Name="TOTAL" Nullable="true" />
+  </ComplexType>
+</Schema>

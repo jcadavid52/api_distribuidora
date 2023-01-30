@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_GEOGRAFIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Ciudad">
+    <Key>
+      <PropertyRef Name="Pk_id_ciudad" />
+    </Key>
+    <Property Name="Pk_id_ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_ciudad" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="id_pais" Type="Int32" />
+    <Property Name="id_depto" Type="Int32" />
+    <NavigationProperty Name="Depto" Relationship="Self.fk_depto" FromRole="Ciudad" ToRole="Depto" />
+    <NavigationProperty Name="Pais" Relationship="Self.fk_pais" FromRole="Ciudad" ToRole="Pais" />
+  </EntityType>
+  <EntityType Name="Depto">
+    <Key>
+      <PropertyRef Name="Pk_id_Depto" />
+    </Key>
+    <Property Name="Pk_id_Depto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_Depto" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ciudad" Relationship="Self.fk_depto" FromRole="Depto" ToRole="Ciudad" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="Pk_id_pais" />
+    </Key>
+    <Property Name="Pk_id_pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_pais" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ciudad" Relationship="Self.fk_pais" FromRole="Pais" ToRole="Ciudad" />
+  </EntityType>
+  <Association Name="fk_depto">
+    <End Role="Depto" Type="Self.Depto" Multiplicity="0..1" />
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Depto">
+        <PropertyRef Name="Pk_id_Depto" />
+      </Principal>
+      <Dependent Role="Ciudad">
+        <PropertyRef Name="id_depto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pais">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Pk_id_pais" />
+      </Principal>
+      <Dependent Role="Ciudad">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_GEOGRAFIAEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
+    <EntitySet Name="Depto" EntityType="Self.Depto" />
+    <EntitySet Name="Pais" EntityType="Self.Pais" />
+    <AssociationSet Name="fk_depto" Association="Self.fk_depto">
+      <End Role="Depto" EntitySet="Depto" />
+      <End Role="Ciudad" EntitySet="Ciudad" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pais" Association="Self.fk_pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Ciudad" EntitySet="Ciudad" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
